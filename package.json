@@ -1,0 +1,39 @@
+{
+	"name": "dicio-cli",
+	"description": "CLI para o dicio.com.br",
+	"version": "0.0.1",
+	"license": "UNLICENSED",
+	"bin": {
+		"dicio": "src/index.js"
+	},
+	"author": {
+		"name": "Thiago Nelsi do Couto",
+		"email": "thiagonelsi@gmail.com"
+	},
+	"keywords": [
+		"dicio",
+		"Thiago Nelsi do Couto"
+	],
+	"files": [
+		"index.js",
+		"utils"
+	],
+	"scripts": {
+		"format": "eslint \"./src/**/*.{js,json}\" --fix"
+	},
+	"dependencies": {
+		"axios": "^0.26.0",
+		"chalk": "^4.1.2",
+		"cli-alerts": "^1.2.2",
+		"cli-handle-error": "^4.4.0",
+		"cli-handle-unhandled": "^1.1.1",
+		"cli-meow-help": "^2.0.2",
+		"cli-welcome": "^2.2.2",
+		"meow": "^9.0.0"
+	},
+	"devDependencies": {
+		"eslint": "^8.10.0",
+		"eslint-config-airbnb-base": "^15.0.0",
+		"eslint-plugin-import": "^2.25.4"
+	}
+}
