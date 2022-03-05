@@ -1,8 +1,6 @@
 const axios = require('axios').default;
 const chalk = require('chalk');
-
-const wordStyle = chalk.hex('#36BB09').bold;
-const { underline } = chalk;
+const { wordStyle, underline, red } = require('../utils/chalkUtils');
 
 async function significado(word) {
   try {
@@ -20,11 +18,8 @@ async function significado(word) {
       });
       console.log();
     });
-
-    const link = chalk.bold('Abrir no site: ') + chalk.underline(`https://dicio.com.br/${word}`);
-    console.log(`\n\t${link}\n`);
   } catch (err) {
-    console.log(chalk.red(`Significado de ${word} não encontrado.`));
+    console.log(red(`\tSignificado de ${word} não encontrado.`));
   }
 }
 

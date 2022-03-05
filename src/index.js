@@ -7,18 +7,14 @@
  * @author Thiago Nelsi do Couto <->
  */
 
+const fs = require('fs');
 const init = require('./utils/init');
 const cli = require('./utils/cli');
+const { openSite } = require('./utils/messages');
 
 const { input } = cli;
 const { flags } = cli;
 const { clear } = flags;
-
-const options = ['significado'];
-
-const handlers = {
-  significado: require('./handlers/significado'),
-};
 
 (async () => {
   init({ clear });
@@ -28,6 +24,20 @@ const handlers = {
     return;
   }
 
+  let promises;
+  const options = [];
+  const handlers = {};
+
+  promises = fs.readdirSync(`${__dirname}/handlers`).map(async (file) => {
+    if (file.endsWith('.js')) {
+      const fileName = file.replace('.js', '');
+      options.push(fileName);
+      handlers[fileName] = (await import(`./handlers/${fileName}.js`)).default;
+    }
+  });
+
+  await Promise.all(promises);
+
   const word = input.join(' ');
   const activeFlags = Object.keys(flags)
     .filter((flag) => flags[flag] && options.includes(flag));
@@ -36,8 +46,11 @@ const handlers = {
     const only = activeFlags[activeFlags.indexOf('apenas') + 1];
     await handlers[only](word);
   } else {
-    activeFlags.forEach((flag) => {
-      handlers[flag]?.(word);
+    promises = activeFlags.map(async (flag) => {
+      await handlers[flag]?.(word);
     });
+
+    await Promise.all(promises);
   }
+  console.log(`\n\t${openSite(word)}\n`);
 })();

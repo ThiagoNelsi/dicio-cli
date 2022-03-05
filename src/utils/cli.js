@@ -8,6 +8,18 @@ const flags = {
     alias: 'S',
     default: true,
   },
+  sinonimos: {
+    type: 'boolean',
+    alias: 's',
+    desc: 'Retorna os sinônimos da palavra',
+    default: false,
+  },
+  apenas: {
+    type: 'boolean',
+    alias: 'a',
+    desc: 'Retorna apenas a próxima opção',
+    default: false,
+  },
   clear: {
     type: 'boolean',
     default: false,
