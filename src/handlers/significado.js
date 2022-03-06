@@ -6,6 +6,8 @@ async function significado(word) {
   try {
     const { data } = await axios.get(`https://significado.herokuapp.com/${word}`);
 
+    console.log('\t------------------------------\n');
+
     console.log(`\tSignificados de ${wordStyle(word.toUpperCase())}:\n`);
 
     data.forEach((wordClass) => {
@@ -16,7 +18,7 @@ async function significado(word) {
       wordClass.meanings.forEach((meaning) => {
         console.log(`${chalk.cyan('\t\t*')} ${meaning}`);
       });
-      console.log();
+      console.log('\n\t------------------------------');
     });
   } catch (err) {
     console.log(red(`\tSignificado de ${word} não encontrado.`));
